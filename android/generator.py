@@ -33,6 +33,7 @@ def main():
                     'RELEASE_TYPE': release_type,
                     'VERSION': version,
                 },
+                'branch': version
             },
         })
     print(yaml.dump(pipeline))
