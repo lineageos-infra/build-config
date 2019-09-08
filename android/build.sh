@@ -13,7 +13,11 @@ export CPU_SSE42=false
 # RELEASE_TYPE
 # EXP_PICK_CHANGES
 
-export BUILD_NUMBER=$( (date +%s%N ; echo $CI_PIPELINE_ID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
+if [ -z "BUILD_UUID" ]; then
+  export BUILD_UUID=$(uuidgen)
+fi
+
+export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
 
 cd /lineage/android
 rm -rf .repo/local_manifests/*
@@ -35,6 +39,6 @@ if [ "$RELEASE_TYPE" '==' "experimental" ]; then
 fi
 mka otatools-package target-files-package dist
 
-#ssh jenkins@blob.lineageos.org mkdir -p  /home/jenkins/incoming/${DEVICE}/${CI_PIPELINE_ID}/
-#scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${CI_PIPELINE_ID}/
-#scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${CI_PIPELINE_ID}/
+ssh jenkins@blob.lineageos.org mkdir -p  /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
+scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
+scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
