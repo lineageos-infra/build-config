@@ -35,10 +35,12 @@ set +e
 breakfast lineage_${DEVICE}-${TYPE}
 set -e
 if [ "$RELEASE_TYPE" '==' "experimental" ]; then
-  repopick $EXP_PICK_CHANGES
+  if [ -z "$EXP_PICK_CHANGES" ]; then
+    repopick $EXP_PICK_CHANGES
+  fi
 fi
 mka otatools-package target-files-package dist
 
-ssh jenkins@blob.lineageos.org mkdir -p  /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
+ssh jenkins@blob.lineageos.org mkdir -p /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
