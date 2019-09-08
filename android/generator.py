@@ -3,6 +3,7 @@
 from datetime import datetime
 import random
 import sys
+import uuid
 
 import yaml
 
@@ -32,6 +33,7 @@ def main():
                     'DEVICE': device,
                     'RELEASE_TYPE': release_type,
                     'VERSION': version,
+                    'BUILD_UUID': uuid.uuid4().hex,
                 },
                 'branch': version
             },
