@@ -14,8 +14,12 @@ export CPU_SSE42=false
 # RELEASE_TYPE
 # EXP_PICK_CHANGES
 
-if [ -z "BUILD_UUID" ]; then
+if [ -z "$BUILD_UUID" ]; then
   export BUILD_UUID=$(uuidgen)
+fi
+
+if [ -z "$TYPE"]; then
+  export TYPE=userdebug
 fi
 
 export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
