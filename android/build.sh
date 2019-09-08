@@ -18,7 +18,7 @@ if [ -z "$BUILD_UUID" ]; then
   export BUILD_UUID=$(uuidgen)
 fi
 
-if [ -z "$TYPE"]; then
+if [ -z "$TYPE" ]; then
   export TYPE=userdebug
 fi
 
