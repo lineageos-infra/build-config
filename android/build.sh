@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "--- Setup"
 export USE_CCACHE="1"
 export PYTHONDONTWRITEBYTECODE=true
 export BUILD_ENFORCE_SELINUX=1
@@ -19,6 +20,8 @@ fi
 
 export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
 
+echo "--- Syncing"
+
 cd /lineage/android
 rm -rf .repo/local_manifests/*
 if [ -f /lineage/setup.sh ]; then
@@ -30,6 +33,9 @@ repo forall -vc "git reset --hard" > /tmp/android-reset.log 2>&1
 echo "Syncing"
 repo sync -j32 -d --force-sync > /tmp/android-sync.log 2>&1
 . build/envsetup.sh
+
+echo "--- mka clobber"
+
 mka clobber
 set +e
 breakfast lineage_${DEVICE}-${TYPE}
@@ -39,8 +45,10 @@ if [ "$RELEASE_TYPE" '==' "experimental" ]; then
     repopick $EXP_PICK_CHANGES
   fi
 fi
+echo "--- Building"
 mka otatools-package target-files-package dist
 
+echo "--- Uploading"
 ssh jenkins@blob.lineageos.org mkdir -p /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
