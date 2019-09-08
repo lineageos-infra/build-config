@@ -35,7 +35,7 @@ set +e
 breakfast lineage_${DEVICE}-${TYPE}
 set -e
 if [ "$RELEASE_TYPE" '==' "experimental" ]; then
-  if [ -z "$EXP_PICK_CHANGES" ]; then
+  if [ -n "$EXP_PICK_CHANGES" ]; then
     repopick $EXP_PICK_CHANGES
   fi
 fi
