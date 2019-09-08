@@ -16,7 +16,7 @@ def main():
         if not line or line.startswith("#"):
             continue
         device, release_type, version, cadence = line.split()
-        
+
         # Only build monthly builds once a month, and only build weekly builds once a week.
         if cadence == "M":
             if random.Random(device).randint(1, 28) != today.day:
@@ -26,7 +26,7 @@ def main():
                 continue
 
         pipeline['steps'].append({
-            'label': '{} {} {} {}'.format(today.strftime("%Y%m%d"), device, version, cadence),
+            'label': '{} {}'.format(device, today.strftime("%Y%m%d")),
             'trigger': 'android',
             'build': {
                 'env': {
