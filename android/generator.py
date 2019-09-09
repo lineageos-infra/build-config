@@ -15,7 +15,7 @@ def main():
     for line in targets.split("\n"):
         if not line or line.startswith("#"):
             continue
-        device, release_type, version, cadence = line.split()
+        device, build_type, version, cadence = line.split()
 
         # Only build monthly builds once a month, and only build weekly builds once a week.
         if cadence == "M":
@@ -31,7 +31,8 @@ def main():
             'build': {
                 'env': {
                     'DEVICE': device,
-                    'RELEASE_TYPE': release_type,
+                    'RELEASE_TYPE': 'nightly',
+                    'TYPE': build_type
                     'VERSION': version,
                     'BUILD_UUID': uuid.uuid4().hex,
                 },
