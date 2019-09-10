@@ -38,7 +38,6 @@ def main():
                 },
                 'branch': version
             },
-            "async": True
         })
     print(yaml.dump(pipeline))
 
