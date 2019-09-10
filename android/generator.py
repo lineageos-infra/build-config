@@ -32,7 +32,7 @@ def main():
                 'env': {
                     'DEVICE': device,
                     'RELEASE_TYPE': 'nightly',
-                    'TYPE': build_type
+                    'TYPE': build_type,
                     'VERSION': version,
                     'BUILD_UUID': uuid.uuid4().hex,
                 },
