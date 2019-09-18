@@ -53,6 +53,15 @@ echo "--- Building"
 mka otatools-package target-files-package dist > /tmp/android-build.log
 
 echo "--- Uploading"
-ssh jenkins@blob.lineageos.org mkdir -p /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
-scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
-scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
+function cleanup() {
+  rm -rf out/upload
+}
+trap "cleanup" ERR
+
+mkdir out/upload
+cp out/dist/*target_files*.zip out/upload
+cp out/target/product/${DEVICE}/otatools.zip out/upload
+
+b2 sync out/upload/ b2://lineage-blobs/incoming/${DEVICE}/${BUILD_UUID}/
+
+cleanup
