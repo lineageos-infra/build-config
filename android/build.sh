@@ -54,6 +54,12 @@ mka clobber
 set +e
 breakfast lineage_${DEVICE}-${TYPE}
 set -e
+
+if [[ "$TARGET_PRODUCT" != lineage_* ]]; then
+    echo "Breakfast failed, exiting"
+    exit 1
+fi
+
 if [ "$RELEASE_TYPE" '==' "experimental" ]; then
   if [ -n "$EXP_PICK_CHANGES" ]; then
     repopick $EXP_PICK_CHANGES
