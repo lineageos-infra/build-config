@@ -75,11 +75,11 @@ if [ "$RELEASE_TYPE" '==' "experimental" ]; then
   fi
 fi
 echo "--- Building"
-use_python2
+use_python3
 mka otatools-package target-files-package dist > /tmp/android-build.log
 
 echo "--- Uploading"
-use_python2
+use_python3
 ssh jenkins@blob.lineageos.org mkdir -p /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
