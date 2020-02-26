@@ -39,7 +39,7 @@ fi
 export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
 
 echo "--- Syncing"
-use_python3()
+use_python3
 
 cd /lineage/${VERSION}
 rm -rf .repo/local_manifests/*
@@ -55,11 +55,11 @@ repo sync -j32 -d --force-sync > /tmp/android-sync.log 2>&1
 
 
 echo "--- clobber"
-use_python2()
+use_python2
 mka clobber
 
 echo "--- breakfast"
-use_python3()
+use_python3
 set +e
 breakfast lineage_${DEVICE}-${TYPE}
 set -e
@@ -75,11 +75,11 @@ if [ "$RELEASE_TYPE" '==' "experimental" ]; then
   fi
 fi
 echo "--- Building"
-use_python2()
+use_python2
 mka otatools-package target-files-package dist > /tmp/android-build.log
 
 echo "--- Uploading"
-use_python2()
+use_python2
 ssh jenkins@blob.lineageos.org mkdir -p /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
