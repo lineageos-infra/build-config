@@ -56,7 +56,7 @@ repo sync -j32 -d --force-sync > /tmp/android-sync.log 2>&1
 
 echo "--- clobber"
 use_python2
-mka clobber
+rm -rf out
 
 echo "--- breakfast"
 use_python3
