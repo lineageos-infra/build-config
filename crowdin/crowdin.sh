@@ -80,7 +80,7 @@ mka otatools-package target-files-package dist > /tmp/android-build.log || exit 
 
 echo "--- Submitting translations"
 source /tmp/venv/bin/activate
-python lineage/crowdin/crowdin_sync.py --username c3po --branch $VERSION -s
+python lineage/crowdin/crowdin_sync.py --username c3po --branch $VERSION -s -o c3po
 echo "Successful"
 deactivate
 rm -rf /tmp/venv
