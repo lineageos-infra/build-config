@@ -23,3 +23,17 @@ jobs:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           ssh mirror@mirror.lineageos.org bash /usr/local/bin/rmbuild ${{github.event.inputs.device}} ${{github.event.inputs.date}}
+      - name: notify slack
+        if: success()
+        run: |
+          curl -XPOST ${{ secrets.SLACK_WEBHOOK }} -d '{"username": "Github Actions", "channel": "#releases", "text": "${{github.event.inputs.device}}/${{github.event.inputs.date}} was removed from the mirror"}'
+      - name: notify slack
+        if: failure()
+        run: |
+          curl -XPOST ${{ secrets.SLACK_WEBHOOK }} -d '{"username": "Github Actions", "channel": "#releases", "text": "${{github.event.inputs.device}}/${{github.event.inputs.date}} was not removed from the mirror, see https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} for more information"}'
+          
+          
+          
+          
+          
+          
