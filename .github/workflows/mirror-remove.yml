@@ -24,5 +24,4 @@ jobs:
           DATE: "${github.event.inputs.date}"
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          ssh mirror@mirror.lineageos.org uptime
-          ssh mirror@mirror.lineageos.org rmbuild ${DEVICE} ${DATE}
+          ssh mirror@mirror.lineageos.org bash /usr/local/bin/rmbuild ${DEVICE} ${DATE}
