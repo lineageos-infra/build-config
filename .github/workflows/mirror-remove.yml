@@ -10,7 +10,18 @@ jobs:
   remove:
     runs-on: ubuntu-latest
     steps:
-      - name: Run a multi-line script
+      - name: Setup SSH Keys and known_hosts
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          echo "${github.event.inputs.device}"
-          echo "${github.event.inputs.date}"
+          mkdir -p ~/.ssh
+          ssh-keyscan mirror.lineageos.org >> ~/.ssh/known_hosts
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.MIRROR_SSH }}"
+      - name: Remove Build
+        env:
+          DEVICE: "${github.event.inputs.device}"
+          DATE: "${github.event.inputs.date}"
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          echo "ssh mirror@mirror.lineageos.org rmbuild $DEVICE $DATE"
