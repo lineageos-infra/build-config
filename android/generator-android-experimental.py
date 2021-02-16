@@ -18,8 +18,8 @@ def main():
         device, build_type, version = line.split()
 
         pipeline['steps'].append({
-            'label': '{} experimental {}'.format(device, today.strftime("%Y%m%d")),
-            'trigger': 'android-experimental',
+            'label': ':rotating_light: EXPERIMENTAL :rotating_light: {} {}'.format(device, today.strftime("%Y%m%d")),
+            'trigger': 'android',
             'build': {
                 'env': {
                     'DEVICE': device,
