@@ -34,6 +34,7 @@ rm -rf out
 # TODO(forkbomb): Modify the crowdin tool so we don't have to change this every time we change branch.
 export LINEAGE_CROWDIN_BASE_PATH_LINEAGE_16_0=/lineage/lineage-16.0
 export LINEAGE_CROWDIN_BASE_PATH_LINEAGE_17_1=/lineage/lineage-17.1
+export LINEAGE_CROWDIN_BASE_PATH_LINEAGE_18_1=/lineage/lineage-18.1
 cd lineage/crowdin
 
 echo "--- setup python environment for translation sync"
