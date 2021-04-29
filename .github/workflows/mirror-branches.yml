@@ -12,5 +12,6 @@ jobs:
           fetch_depth: 0
       - name: mirror branches
         run: |
-          git push origin HEAD:refs/heads/lineage-17.1
-          git push origin HEAD:refs/heads/lineage-18.1
+          git fetch origin main
+          git push origin refs/remotes/origin/main:+refs/heads/lineage-17.1
+          git push origin refs/remotes/origin/main:+refs/heads/lineage-18.1
