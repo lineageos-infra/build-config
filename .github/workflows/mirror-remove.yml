@@ -1,4 +1,4 @@
-aame: Remove build from mirror
+name: Remove build from mirror
 on:
   workflow_dispatch:
     inputs:
