@@ -1,0 +1,16 @@
+name: "Mirror main to lineage-* branches"
+on:
+  push:
+    branches:
+      - main
+jobs:
+  mirror-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch_depth: 0
+      - name: mirror branches
+        run: |
+          git push origin HEAD:refs/heads/lineage-17.1
+          git push origin HEAD:refs/heads/lineage-18.1
