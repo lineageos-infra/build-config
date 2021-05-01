@@ -65,9 +65,7 @@ fi
 
 echo "--- breakfast"
 . build/envsetup.sh
-set +e
-breakfast lineage_blueline-userdebug
-set -e
+breakfast lineage_bonito-userdebug
 
 if [[ "$TARGET_PRODUCT" != lineage_* ]]; then
 	echo "Breakfast failed, exiting"
