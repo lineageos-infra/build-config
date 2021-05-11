@@ -24,7 +24,7 @@ fi
 
 yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION}
 echo "Resetting build tree"
-repo forall -vc "git reset --hard" > /tmp/android-reset.log 2>&1
+repo forall -vc "git reset --hard ; git clean -fdx" > /tmp/android-reset.log 2>&1
 echo "Syncing"
 repo sync -j32 -d --force-sync > /tmp/android-sync.log 2>&1
 
