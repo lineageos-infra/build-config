@@ -40,20 +40,13 @@ cd lineage/crowdin
 echo "--- setup python environment for translation sync"
 
 source /lineage/crowdin.sh
-rm -rf /tmp/venv
 
-# The crowdin script uses fstrings, so we need at least python 3.6 (currently infra uses 3.5 by default)
-virtualenv -p python3.6 /tmp/venv
-source /tmp/venv/bin/activate
-
-pip install -r requirements.txt
+pip3 install --user -r requirements.txt
 
 echo "--- download new translations"
 cd /lineage/${VERSION}
-python lineage/crowdin/crowdin_sync.py --username c3po --branch $VERSION --download -p "$SCRIPT_DIR/crowdin-cli.sh"
+./lineage/crowdin/crowdin_sync.py --username c3po --branch $VERSION --download -p "$SCRIPT_DIR/crowdin-cli.sh"
 STATUS=$?
-# leave the venv while the build is happening.
-deactivate
 
 if [[ $STATUS -eq 2 ]]; then
 	echo "No new translations, not running build."
@@ -78,8 +71,5 @@ mka otatools-package target-files-package dist > /tmp/android-build.log || exit 
 # TODO(forkbomb): Abandon or -1 changes if stuff is broken.
 
 echo "--- Submitting translations"
-source /tmp/venv/bin/activate
-python lineage/crowdin/crowdin_sync.py --username c3po --branch $VERSION -s -o c3po
+./lineage/crowdin/crowdin_sync.py --username c3po --branch $VERSION -s -o c3po
 echo "Successful"
-deactivate
-rm -rf /tmp/venv
