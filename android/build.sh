@@ -16,6 +16,14 @@ export CPU_SSE42=false
 # RELEASE_TYPE
 # EXP_PICK_CHANGES
 
+function get_numeric() {
+    local RESOLUTION=60 # seconds
+    local NOW=$(date +%s)
+    local OFFSET=$(date -d '2021-07-05 UTC' +%s)
+    local BASE=7380771 # RQ3A.210705.001
+    echo "$(( $BASE + ($NOW - $OFFSET) / $RESOLUTION ))"
+}
+
 if [ -z "$BUILD_UUID" ]; then
   export BUILD_UUID=$(uuidgen)
 fi
@@ -24,7 +32,7 @@ if [ -z "$TYPE" ]; then
   export TYPE=userdebug
 fi
 
-export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
+export BUILD_NUMBER=$(get_numeric)
 
 echo "--- Syncing"
 
