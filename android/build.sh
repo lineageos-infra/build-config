@@ -24,7 +24,8 @@ if [ -z "$TYPE" ]; then
   export TYPE=userdebug
 fi
 
-export BUILD_NUMBER=$BUILDKITE_BUILD_NUMBER
+OFFSET=10000000
+export BUILD_NUMBER=$(($OFFSET + $BUILDKITE_BUILD_NUMBER))
 
 echo "--- Syncing"
 
