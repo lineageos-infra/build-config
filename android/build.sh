@@ -24,7 +24,7 @@ if [ -z "$TYPE" ]; then
   export TYPE=userdebug
 fi
 
-export BUILD_NUMBER=$( (date +%s%N ; echo $BUILD_UUID; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
+export BUILD_NUMBER=$BUILDKITE_BUILD_NUMBER
 
 echo "--- Syncing"
 
