@@ -13,5 +13,5 @@ jobs:
       - name: mirror branches
         run: |
           git fetch origin main
-          git push origin -f refs/remotes/origin/main:refs/heads/lineage-17.1
           git push origin -f refs/remotes/origin/main:refs/heads/lineage-18.1
+          git push origin -f refs/remotes/origin/main:refs/heads/lineage-19.0
