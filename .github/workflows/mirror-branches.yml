@@ -14,4 +14,4 @@ jobs:
         run: |
           git fetch origin main
           git push origin -f refs/remotes/origin/main:refs/heads/lineage-18.1
-          git push origin -f refs/remotes/origin/main:refs/heads/lineage-19.0
+          git push origin -f refs/remotes/origin/main:refs/heads/lineage-19.1
