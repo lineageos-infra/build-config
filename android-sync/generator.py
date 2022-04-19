@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-import yaml
+import ruamel.yaml
 
 def main():
     hosts = os.environ.get("HOSTS")
@@ -25,7 +25,7 @@ def main():
                 'agents': ['queue={}'.format(host)],
             })
 
-    print(yaml.dump(pipeline))
+    print(ruamel.yaml.dump(pipeline))
 
 if __name__ == '__main__':
     main()
