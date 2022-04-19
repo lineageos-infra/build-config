@@ -21,7 +21,7 @@ def main():
                     'cd /lineage/{}'.format(version),
                     'yes | repo init -u https://github.com/lineageos/android.git -b {} || if [[ $? -eq 141 ]]; then true; else false; fi'.format(version),
                     'repo sync --prune --no-tags --force-remove-dirty --force-sync --verbose -j128',
-                ]
+                ],
                 'agents': ['queue={}'.format(host)],
             })
 
