@@ -41,8 +41,7 @@ if [ -f /lineage/setup.sh ]; then
 fi
 # catch SIGPIPE from yes
 yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} || if [[ $? -eq 141 ]]; then true; else false; fi
-echo "Resetting build tree"
-repo forall -vc "git reset --hard ; git clean -fdx" > /tmp/android-reset.log 2>&1
+
 echo "Syncing"
 repo sync --detach --no-tags --force-remove-dirty --force-sync -j32 > /tmp/android-sync.log 2>&1
 . build/envsetup.sh
