@@ -31,6 +31,7 @@ export BUILD_NUMBER=$(($OFFSET + $BUILDKITE_BUILD_NUMBER))
 
 echo "--- Syncing"
 
+mkdir -p /lineage/${VERSION}/.repo/local_manifests
 cd /lineage/${VERSION}
 rm -rf .repo/local_manifests/*
 if [ -f /lineage/setup.sh ]; then
