@@ -68,4 +68,4 @@ RUN mkdir /ccache
 
 ENV USE_CCACHE=1
 ENV CCACHE_EXEC=/usr/bin/ccache
-
+ENV CCACHE_DIR=/ccache
