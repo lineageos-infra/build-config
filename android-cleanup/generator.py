@@ -15,6 +15,7 @@ def main():
             "label": f"cleanup for {host}",
             "command": "docker volume rm lineage && docker volume create lineage",
             "agents": [f"host={host}", "queue=docker"],
+            "priority": 5000,
         }
     )
 
