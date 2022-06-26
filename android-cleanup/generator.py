@@ -13,7 +13,7 @@ def main():
     pipeline["steps"].append(
         {
             "label": f"cleanup for {host}",
-            "command": "docker rm lineage && docker create lineage",
+            "command": "docker volume rm lineage && docker volume create lineage",
             "agents": [f"host={host}", "queue=docker"],
         }
     )
