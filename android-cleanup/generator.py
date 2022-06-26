@@ -14,7 +14,7 @@ def main():
         {
             "label": f"cleanup for {host}",
             "command": "uptime",
-            "agents": [f"host={host}"],
+            "agents": [f"host={host}", "queue=docker"],
         }
     )
 
