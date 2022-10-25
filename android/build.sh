@@ -64,7 +64,7 @@ if [ "$RELEASE_TYPE" '==' "experimental" ]; then
 fi
 echo "--- Building"
 export OVERRIDE_TARGET_FLATTEN_APEX=true 
-mka otatools-package target-files-package dist > /tmp/android-build.log
+mka otatools-package target-files-package dist | tee /tmp/android-build.log
 
 echo "--- Uploading"
 ssh jenkins@blob.lineageos.org mkdir -p /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
