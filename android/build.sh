@@ -23,6 +23,10 @@ if [ -z "$BUILD_UUID" ]; then
   export BUILD_UUID=$(uuidgen)
 fi
 
+if [ -z "$REPO_VERSION" ]; then
+  export REPO_VERSION=v2.29.3
+fi
+
 if [ -z "$TYPE" ]; then
   export TYPE=userdebug
 fi
@@ -39,7 +43,7 @@ if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
 fi
 # catch SIGPIPE from yes
-yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} -g default,-darwin || if [[ $? -eq 141 ]]; then true; else false; fi
+yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} -g default,-darwin --repo-rev=${REPO_VERSION} || if [[ $? -eq 141 ]]; then true; else false; fi
 
 echo "Syncing"
 repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 > /tmp/android-sync.log 2>&1
