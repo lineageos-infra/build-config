@@ -24,7 +24,7 @@ if [ -z "$BUILD_UUID" ]; then
 fi
 
 if [ -z "$REPO_VERSION" ]; then
-  export REPO_VERSION=v2.29.3
+  export REPO_VERSION=v2.29.2
 fi
 
 if [ -z "$TYPE" ]; then
