@@ -7,7 +7,11 @@ export PYTHONDONTWRITEBYTECODE=true
 export BUILD_ENFORCE_SELINUX=1
 export BUILD_NO=
 unset BUILD_NUMBER
-export OVERRIDE_TARGET_FLATTEN_APEX=true
+
+if [ "$VERSION" == "lineage-18.1" ] || [ "$VERSION" == "lineage-19.1" ]; then
+  export OVERRIDE_TARGET_FLATTEN_APEX=true
+fi
+
 #TODO(zif): convert this to a runtime check, grep "sse4_2.*popcnt" /proc/cpuinfo
 export CPU_SSE42=false
 
