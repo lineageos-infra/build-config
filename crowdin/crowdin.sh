@@ -1,8 +1,10 @@
 #!/bin/bash
-
+set -eo pipefail
 echo "--- Setup"
+rm /tmp/android-*.log || true
 export USE_CCACHE="1"
 export CCACHE_EXEC=/usr/bin/ccache
+ccache -s
 export PYTHONDONTWRITEBYTECODE=true
 export BUILD_ENFORCE_SELINUX=1
 export BUILD_NO=
@@ -14,23 +16,33 @@ fi
 
 #TODO(zif): convert this to a runtime check, grep "sse4_2.*popcnt" /proc/cpuinfo
 export CPU_SSE42=false
+# Following env is set from build
+# VERSION
+
+if [ -z "$REPO_VERSION" ]; then
+  export REPO_VERSION=v2.28
+fi
 
 cd $(dirname $0)
 SCRIPT_DIR=`pwd`
-cd /lineage/${VERSION}
 
+echo "--- Syncing"
+
+mkdir -p /lineage/${VERSION}/.repo/local_manifests
+cd /lineage/${VERSION}
 rm -rf .repo/local_manifests/*
 cp lineage/crowdin/config/${VERSION}_extra_packages.xml .repo/local_manifests
-
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
 fi
+# catch SIGPIPE from yes
+yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} -g default,-darwin --repo-rev=${REPO_VERSION} || if [[ $? -eq 141 ]]; then true; else false; fi
+repo version
 
-yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION}
-echo "Resetting build tree"
-repo forall -vc "git reset --hard ; git clean -fdx" > /tmp/android-reset.log 2>&1
 echo "Syncing"
-repo sync -j32 -d --force-sync > /tmp/android-sync.log 2>&1
+repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 > /tmp/android-sync.log 2>&1
+. build/envsetup.sh
+
 
 echo "--- clobber"
 rm -rf out
@@ -61,19 +73,21 @@ elif [[ $STATUS -ne 0 ]]; then
 fi
 
 echo "--- breakfast"
-. build/envsetup.sh
 breakfast lineage_bonito-userdebug
 
 if [[ "$TARGET_PRODUCT" != lineage_* ]]; then
-	echo "Breakfast failed, exiting"
-	# TODO(forkbomb): Abandon or -1 changes if stuff is broken.
-	exit 1
+    echo "Breakfast failed, exiting"
+    # TODO(forkbomb): Abandon or -1 changes if stuff is broken.
+    exit 1
 fi
 
 echo "--- Building"
-mka otatools-package target-files-package dist > /tmp/android-build.log || exit 1
+mka otatools-package target-files-package dist | tee /tmp/android-build.log || exit 1
 # TODO(forkbomb): Abandon or -1 changes if stuff is broken.
 
 echo "--- Submitting translations"
 ./lineage/crowdin/crowdin_sync.py --username c3po --branch $VERSION -s -o c3po
 echo "Successful"
+
+echo "--- cleanup"
+rm -rf out
