@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from datetime import datetime
+import os
 import random
 import sys
 import uuid
@@ -11,14 +12,19 @@ def main():
     targets = sys.stdin.read()
     pipeline = {"steps": []}
     today = datetime.today()
+    ship = os.getenv("SHIP")
 
     for line in targets.split("\n"):
         if not line or line.startswith("#"):
             continue
         device, build_type, version, cadence = line.split()
 
-        # Only build monthly builds once a month, and only build weekly builds once a week.
-        if cadence == "M":
+        # Build all day 1 devices for given version, otherwise only build monthly
+        # builds once a month, and only build weekly builds once a week.
+        if ship:
+            if ship != version:
+                continue
+        elif cadence == "M":
             if random.Random(device).randint(1, 28) != today.day:
                 continue
         elif cadence == "W":
