@@ -33,6 +33,7 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     openjdk-8-jdk \
     pngcrush \
     rsync \
+    s3cmd \
     schedtool \
     squashfs-tools \
     wget \
