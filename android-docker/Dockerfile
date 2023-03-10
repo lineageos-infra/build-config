@@ -10,6 +10,7 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     g++-multilib \
     gcc-multilib \
     git \
+    git-lfs \
     gnupg \
     gperf \
     imagemagick \
