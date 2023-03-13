@@ -51,6 +51,7 @@ yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} -g def
 repo version
 
 echo "Syncing"
+repo forall external/chromium-webview/prebuilt/* -c "git lfs pull"
 repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 > /tmp/android-sync.log 2>&1
 . build/envsetup.sh
 
