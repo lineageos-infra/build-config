@@ -10,14 +10,13 @@ export BUILD_ENFORCE_SELINUX=1
 export BUILD_NO=
 unset BUILD_NUMBER
 
-if [ "$VERSION" == "lineage-18.1" ] || [ "$VERSION" == "lineage-19.1" ]; then
+if [ "$BUILDKITE_BRANCH" == "lineage-18.1" ] || [ "$BUILDKITE_BRANCH" == "lineage-19.1" ]; then
   export OVERRIDE_TARGET_FLATTEN_APEX=true
 fi
 
 #TODO(zif): convert this to a runtime check, grep "sse4_2.*popcnt" /proc/cpuinfo
 export CPU_SSE42=false
 # Following env is set from build
-# VERSION
 # DEVICE
 # TYPE
 # RELEASE_TYPE
@@ -40,14 +39,14 @@ export BUILD_NUMBER=$(($OFFSET + $BUILDKITE_BUILD_NUMBER))
 
 echo "--- Syncing"
 
-mkdir -p /lineage/${VERSION}/.repo/local_manifests
-cd /lineage/${VERSION}
+mkdir -p /lineage/${BUILDKITE_BRANCH}/.repo/local_manifests
+cd /lineage/${BUILDKITE_BRANCH}
 rm -rf .repo/local_manifests/*
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
 fi
 # catch SIGPIPE from yes
-yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} -g default,-darwin --repo-rev=${REPO_VERSION} --git-lfs || if [[ $? -eq 141 ]]; then true; else false; fi
+yes | repo init -u https://github.com/lineageos/android.git -b ${BUILDKITE_BRANCH} -g default,-darwin --repo-rev=${REPO_VERSION} --git-lfs || if [[ $? -eq 141 ]]; then true; else false; fi
 repo version
 
 echo "Syncing"
