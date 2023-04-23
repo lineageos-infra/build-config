@@ -62,7 +62,7 @@ cd /lineage/${BUILDKITE_BRANCH}
 
 if [[ $UPLOAD_SOURCES -eq 1 ]]; then
   echo "--- upload sources"
-  ./lineage/crowdin/crowdin_sync.py --branch $BUILDKITE_BRANCH --upload-sources
+  ./lineage/crowdin/crowdin_sync.py --branch $BUILDKITE_BRANCH --upload-sources -p "$SCRIPT_DIR/crowdin-cli.sh"
   exit
 fi
 
