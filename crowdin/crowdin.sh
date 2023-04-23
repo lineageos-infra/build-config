@@ -58,9 +58,15 @@ echo "--- setup python environment for translation sync"
 source /lineage/crowdin.sh
 
 pip3 install --user -r requirements.txt
+cd /lineage/${BUILDKITE_BRANCH}
+
+if [[ $UPLOAD_SOURCES -eq 1 ]]; then
+  echo "--- upload sources"
+  ./lineage/crowdin/crowdin_sync.py --branch $BUILDKITE_BRANCH --upload-sources
+  exit
+fi
 
 echo "--- download new translations"
-cd /lineage/${BUILDKITE_BRANCH}
 ./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH --download -p "$SCRIPT_DIR/crowdin-cli.sh"
 STATUS=$?
 
