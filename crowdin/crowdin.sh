@@ -79,17 +79,18 @@ elif [[ $STATUS -ne 0 ]]; then
 fi
 
 echo "--- breakfast"
-breakfast lineage_bonito-userdebug
-
-if [[ "$TARGET_PRODUCT" != lineage_* ]]; then
-    echo "Breakfast failed, exiting"
-    # TODO(forkbomb): Abandon or -1 changes if stuff is broken.
-    exit 1
+if ! breakfast lineage_bonito-userdebug; then
+  echo "Breakfast failed, exiting"
+  ./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -g abandon -o c3po
+  exit 1
 fi
 
 echo "--- Building"
-mka otatools-package target-files-package dist | tee /tmp/android-build.log || exit 1
-# TODO(forkbomb): Abandon or -1 changes if stuff is broken.
+if ! mka otatools-package target-files-package dist | tee /tmp/android-build.log; then
+  echo "Build failed, exiting"
+  ./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -g abandon -o c3po
+  exit 1
+fi
 
 echo "--- Submitting translations"
 ./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -g submit -o c3po
