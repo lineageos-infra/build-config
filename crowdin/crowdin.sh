@@ -29,6 +29,7 @@ echo "--- Syncing"
 mkdir -p /lineage/${BUILDKITE_BRANCH}/.repo/local_manifests
 cd /lineage/${BUILDKITE_BRANCH}
 rm -rf .repo/local_manifests/*
+repo sync lineage/crowdin
 cp lineage/crowdin/config/${BUILDKITE_BRANCH}_extra_packages.xml .repo/local_manifests
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
