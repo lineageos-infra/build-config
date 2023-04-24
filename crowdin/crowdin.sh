@@ -92,7 +92,7 @@ mka otatools-package target-files-package dist | tee /tmp/android-build.log || e
 # TODO(forkbomb): Abandon or -1 changes if stuff is broken.
 
 echo "--- Submitting translations"
-./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -s -o c3po
+./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -g submit -o c3po
 echo "Successful"
 
 echo "--- cleanup"
