@@ -4,13 +4,14 @@ echo "--- Setup"
 if [ -z "$REPO_VERSION" ]; then
   export REPO_VERSION=v2.28
 fi
-if [ -f /lineage/setup.sh ]; then
-    source /lineage/setup.sh
-fi
 
 echo "--- Syncing"
 cd /lineage/$BUILDKITE_BRANCH
 repo sync lineage/{hudson,scripts}
+
+if [ -f /lineage/setup.sh ]; then
+    source /lineage/setup.sh
+fi
 
 cd lineage/scripts/device-deps-regenerator
 pip3 install --user -r requirements.txt
