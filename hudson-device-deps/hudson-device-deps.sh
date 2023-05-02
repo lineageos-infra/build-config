@@ -32,5 +32,5 @@ rm out.json
 cd ../../hudson/updater
 
 if git add device_deps.json && git commit -m "Regenerate device dependency mappings"; then
-  git push ssh://c3po@review.lineageos.org:29418/LineageOS/hudson HEAD:refs/for/master%l=Code-Review+2,Verified+1%submit
+  git push ssh://c3po@review.lineageos.org:29418/LineageOS/hudson HEAD:refs/for/master%l=Code-Review+2,l=Verified,submit
 fi
