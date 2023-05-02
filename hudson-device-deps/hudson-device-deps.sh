@@ -4,6 +4,9 @@ echo "--- Setup"
 if [ -z "$REPO_VERSION" ]; then
   export REPO_VERSION=v2.28
 fi
+if [ -f /lineage/setup.sh ]; then
+    source /lineage/setup.sh
+fi
 
 echo "--- Syncing"
 cd /lineage/$BUILDKITE_BRANCH
