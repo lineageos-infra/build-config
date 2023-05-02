@@ -6,7 +6,7 @@ if [ -z "$REPO_VERSION" ]; then
 fi
 
 echo "--- Syncing"
-cd /lineage/lineage-20.0
+cd /lineage/$BUILDKITE_BRANCH
 repo sync lineage/{hudson,scripts}
 
 cd lineage/scripts/device-deps-regenerator
