@@ -6,7 +6,7 @@ mkdir -p ${REPO}
 git clone https://github.com/${REPO} ${REPO} -b ${DEST_BRANCH}
 cd ${REPO}
 git remote add gerrit ssh://c3po@review.lineageos.org:29418/${REPO}
-git push gerrit HEAD:refs/heads/backup/${DEST_BRANCH}_$(date +%Y%m%d-%H%m)
+git push gerrit HEAD:refs/backups/heads/$(date +%Y%m%d-%H%m)/${DEST_BRANCH}
 git remote add new ${SRC_REPO}
 git fetch new ${SRC_BRANCH}
 git checkout FETCH_HEAD
