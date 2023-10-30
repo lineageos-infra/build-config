@@ -7,7 +7,7 @@ git clone https://github.com/${REPO} ${REPO}
 cd ${REPO}
 git remote add gerrit ssh://c3po@review.lineageos.org:29418/${REPO}
 if git checkout ${DEST_BRANCH}; then
-    git push gerrit HEAD:refs/backups/heads/$(date +%Y%m%d-%H%m)/${DEST_BRANCH}
+    git push gerrit HEAD:refs/backups/heads/$(date +%Y%m%d-%H%M)/${DEST_BRANCH}
 fi
 git remote add new ${SRC_REPO}
 git fetch new ${SRC_BRANCH}
