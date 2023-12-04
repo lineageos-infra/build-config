@@ -52,7 +52,7 @@ repo version
 
 echo "Syncing"
 repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 > /tmp/android-sync.log 2>&1
-repo forall external/chromium-webview/prebuilt/* -c "git lfs pull"
+repo forall -c "git lfs pull"
 . build/envsetup.sh
 
 
