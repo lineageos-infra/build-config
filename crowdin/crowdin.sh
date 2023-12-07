@@ -29,11 +29,11 @@ echo "--- Syncing"
 mkdir -p /lineage/${BUILDKITE_BRANCH}/.repo/local_manifests
 cd /lineage/${BUILDKITE_BRANCH}
 rm -rf .repo/local_manifests/*
-repo sync lineage/crowdin
 cp lineage/crowdin/config/${BUILDKITE_BRANCH}_extra_packages.xml .repo/local_manifests
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
 fi
+repo sync lineage/crowdin
 # catch SIGPIPE from yes
 yes | repo init -u https://github.com/lineageos/android.git -b ${BUILDKITE_BRANCH} -g default,-darwin --repo-rev=${REPO_VERSION} --git-lfs || if [[ $? -eq 141 ]]; then true; else false; fi
 repo version
