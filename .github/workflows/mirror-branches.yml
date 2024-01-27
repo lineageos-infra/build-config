@@ -15,3 +15,4 @@ jobs:
           git fetch origin main
           git push origin -f refs/remotes/origin/main:refs/heads/lineage-19.1
           git push origin -f refs/remotes/origin/main:refs/heads/lineage-20.0
+          git push origin -f refs/remotes/origin/main:refs/heads/lineage-21.0
