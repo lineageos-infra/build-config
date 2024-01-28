@@ -2,7 +2,7 @@
 set -eo pipefail
 echo "--- Setup"
 rm /tmp/android-*.log || true
-unset USE_CCACHE
+unset CCACHE_EXEC
 export PYTHONDONTWRITEBYTECODE=true
 export BUILD_ENFORCE_SELINUX=1
 export BUILD_NO=
