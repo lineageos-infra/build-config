@@ -25,7 +25,6 @@ def main():
                     'DEVICE': device,
                     'RELEASE_TYPE': 'experimental',
                     'TYPE': build_type,
-                    'VERSION': version,
                     'BUILD_UUID': uuid.uuid4().hex,
                 },
                 'branch': version
