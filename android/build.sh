@@ -58,7 +58,7 @@ echo "--- clobber"
 rm -rf out
 
 echo "--- breakfast"
-breakfast lineage_${DEVICE}-${TYPE}
+breakfast ${DEVICE} ${TYPE}
 
 if [[ "$TARGET_PRODUCT" != lineage_* ]]; then
     echo "Breakfast failed, exiting"
