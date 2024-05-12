@@ -37,7 +37,11 @@ yes | repo init -u https://github.com/lineageos/android.git -b ${BUILDKITE_BRANC
 repo version
 
 echo "Syncing"
-repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32
+(
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 ||
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 ||
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32
+)
 repo forall -c "git lfs pull"
 . build/envsetup.sh
 

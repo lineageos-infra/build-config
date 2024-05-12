@@ -49,7 +49,11 @@ yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} -g def
 repo version
 
 echo "Syncing"
-repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 > /tmp/android-sync.log 2>&1
+(
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 ||
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 ||
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32
+) > /tmp/android-sync.log 2>&1
 repo forall -c "git lfs pull"
 . build/envsetup.sh
 
