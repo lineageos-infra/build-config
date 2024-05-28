@@ -22,7 +22,8 @@ export CPU_SSE42=false
 # EXP_PICK_CHANGES
 
 if [ -z "$BUILD_UUID" ]; then
-  export BUILD_UUID=$(uuidgen)
+  echo "BUILD_UUID environment variable required"
+  exit 1
 fi
 
 if [ -z "$REPO_VERSION" ]; then
