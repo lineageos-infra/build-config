@@ -27,6 +27,7 @@ echo "--- Syncing"
 mkdir -p /lineage/${BUILDKITE_BRANCH}/.repo/local_manifests
 cd /lineage/${BUILDKITE_BRANCH}
 rm -rf .repo/local_manifests/*
+rm -rf vendor || true
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
 fi

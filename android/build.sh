@@ -42,6 +42,7 @@ echo "--- Syncing"
 mkdir -p /lineage/${VERSION}/.repo/local_manifests
 cd /lineage/${VERSION}
 rm -rf .repo/local_manifests/*
+rm -rf vendor || true
 if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
 fi
