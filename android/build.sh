@@ -34,6 +34,11 @@ if [ -z "$TYPE" ]; then
   export TYPE=userdebug
 fi
 
+if [ -z "$RELEASE_TYPE" ]; then
+  echo "RELEASE_TYPE environment variable required"
+  exit 1
+fi
+
 OFFSET="10000000"
 export BUILD_NUMBER=$(($OFFSET + $BUILDKITE_BUILD_NUMBER))
 
