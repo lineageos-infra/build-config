@@ -56,6 +56,7 @@ export LINEAGE_CROWDIN_BASE_PATH_LINEAGE_18_1=/lineage/lineage-18.1
 export LINEAGE_CROWDIN_BASE_PATH_LINEAGE_19_1=/lineage/lineage-19.1
 export LINEAGE_CROWDIN_BASE_PATH_LINEAGE_20_0=/lineage/lineage-20.0
 export LINEAGE_CROWDIN_BASE_PATH_LINEAGE_21_0=/lineage/lineage-21.0
+export LINEAGE_CROWDIN_BASE_PATH_LINEAGE_22_0=/lineage/lineage-22.0
 cd lineage/crowdin
 
 echo "--- setup python environment for translation sync"
