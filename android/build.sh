@@ -52,7 +52,7 @@ if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
 fi
 # catch SIGPIPE from yes
-yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} -g default,-darwin,-muppets,muppets_${DEVICE} --repo-rev=${REPO_VERSION} --git-lfs || if [[ $? -eq 141 ]]; then true; else false; fi
+yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} -g default,-darwin,-muppets,muppets_${DEVICE} --repo-rev=${REPO_VERSION} --git-lfs --no-clone-bundle || if [[ $? -eq 141 ]]; then true; else false; fi
 repo version
 
 echo "Syncing"
