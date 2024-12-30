@@ -32,7 +32,7 @@ if [ -f /lineage/setup.sh ]; then
     source /lineage/setup.sh
 fi
 # catch SIGPIPE from yes
-yes | repo init -u https://github.com/lineageos/android.git -b ${BUILDKITE_BRANCH} -g default,-darwin,-muppets,muppets_barbet --repo-rev=${REPO_VERSION} --git-lfs --no-clone-bundle || if [[ $? -eq 141 ]]; then true; else false; fi
+yes | repo init -u https://github.com/lineageos/android.git -b ${BUILDKITE_BRANCH} -g default,-darwin,-muppets,muppets_shiba --repo-rev=${REPO_VERSION} --git-lfs --no-clone-bundle || if [[ $? -eq 141 ]]; then true; else false; fi
 repo version
 repo sync lineage/crowdin
 cp lineage/crowdin/config/${BUILDKITE_BRANCH}_extra_packages.xml .repo/local_manifests
@@ -86,7 +86,7 @@ elif [[ $STATUS -ne 0 ]]; then
 fi
 
 echo "--- breakfast"
-if ! breakfast barbet; then
+if ! breakfast shiba; then
   echo "Breakfast failed, exiting"
   ./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -g abandon -m "$BUILDKITE_BUILD_URL failed." -o c3po
   exit 1
