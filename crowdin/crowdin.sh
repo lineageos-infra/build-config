@@ -16,7 +16,7 @@ fi
 export CPU_SSE42=false
 
 if [ -z "$REPO_VERSION" ]; then
-  export REPO_VERSION=v2.28
+  export REPO_VERSION=v2.50.1
 fi
 
 cd $(dirname $0)

@@ -2,7 +2,7 @@
 set -eo pipefail
 echo "--- Setup"
 if [ -z "$REPO_VERSION" ]; then
-  export REPO_VERSION=v2.28
+  export REPO_VERSION=v2.50.1
 fi
 
 echo "--- Syncing"
