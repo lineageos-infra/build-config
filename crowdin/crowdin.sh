@@ -39,9 +39,9 @@ cp lineage/crowdin/config/${BUILDKITE_BRANCH}_extra_packages.xml .repo/local_man
 
 echo "Syncing"
 (
-  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 ||
-  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32 ||
-  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j32
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16 ||
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16 ||
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16
 )
 repo forall -c "git lfs pull"
 . build/envsetup.sh
