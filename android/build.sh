@@ -77,8 +77,9 @@ if [[ "$TARGET_PRODUCT" != lineage_* ]]; then
 fi
 
 if [ "$RELEASE_TYPE" '==' "experimental" ]; then
-  if [ -n "$EXP_PICK_CHANGES" ]; then
-    repopick $EXP_PICK_CHANGES
+  if [ ! -z "$EXP_PICK_CHANGES" ]; then
+    read -ra EXP_PICK_CHANGES <<< "$EXP_PICK_CHANGES"
+    repopick ${EXP_PICK_CHANGES[@]}
   fi
 fi
 echo "--- Building"
