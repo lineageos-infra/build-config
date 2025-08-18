@@ -1,0 +1,36 @@
+_: &default_branch lineage-22.2
+_: &default_apk_path app/build/outputs/apk/release/app-release-unsigned.apk
+
+apps:
+  - name: Aperture
+    repo: android_packages_apps_Aperture
+    branch: *default_branch
+    apk_path: *default_apk_path
+  - name: Camelot
+    repo: android_packages_apps_Camelot
+    branch: *default_branch
+    apk_path: *default_apk_path
+  - name: ExactCalculator
+    repo: android_packages_apps_ExactCalculator
+    branch: *default_branch
+    apk_path: build/outputs/apk/release/ExactCalculator-release-unsigned.apk
+  - name: Glimpse
+    repo: android_packages_apps_Glimpse
+    branch: *default_branch
+    apk_path: *default_apk_path
+  - name: Jelly
+    repo: android_packages_apps_Jelly
+    branch: *default_branch
+    apk_path: *default_apk_path
+  - name: LatinIME
+    repo: android_packages_inputmethods_LatinIME
+    branch: *default_branch
+    apk_path: build/outputs/apk/release/LatinIME-release.apk
+  - name: Recorder
+    repo: android_packages_apps_Recorder
+    branch: *default_branch
+    apk_path: *default_apk_path
+  - name: Twelve
+    repo: android_packages_apps_Twelve
+    branch: *default_branch
+    apk_path: *default_apk_path
