@@ -61,7 +61,7 @@ echo "Syncing"
   repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16 ||
   repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16
 ) > /tmp/android-sync.log 2>&1
-repo forall -c "git lfs pull"
+repo forall -vpc "git lfs pull" >> /tmp/android-sync.log 2>&1
 . build/envsetup.sh
 
 
