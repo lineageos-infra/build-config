@@ -17,3 +17,4 @@ jobs:
           git push origin -f refs/remotes/origin/main:refs/heads/lineage-22.0
           git push origin -f refs/remotes/origin/main:refs/heads/lineage-22.1
           git push origin -f refs/remotes/origin/main:refs/heads/lineage-22.2
+          git push origin -f refs/remotes/origin/main:refs/heads/lineage-23.0
