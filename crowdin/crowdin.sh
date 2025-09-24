@@ -84,14 +84,14 @@ elif [[ $STATUS -ne 0 ]]; then
 fi
 
 echo "--- breakfast"
-if ! breakfast cf_phone_arm64; then
+if ! breakfast ingot; then
   echo "Breakfast failed, exiting"
   ./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -g abandon -m "$BUILDKITE_BUILD_URL failed." -o c3po
   exit 1
 fi
 
 echo "--- Building"
-if ! TARGET_DISABLE_EPPE=true mka otatools-package target-files-package dist | tee /tmp/android-build.log; then
+if ! mka otatools-package target-files-package dist | tee /tmp/android-build.log; then
   echo "Build failed, exiting"
   ./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -g abandon -m "$BUILDKITE_BUILD_URL failed." -o c3po
   exit 1
