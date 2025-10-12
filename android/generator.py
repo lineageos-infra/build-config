@@ -24,9 +24,10 @@ def main():
         # builds once a month, and only build weekly builds once a week.
         if skip == version:
             continue
-        if ship and ship != version:
-            continue
-        if cadence == "M":
+        if ship:
+            if ship != version:
+                continue
+        elif cadence == "M":
             if random.Random(device).randint(1, 28) != today.day:
                 continue
         elif cadence == "W":
