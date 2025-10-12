@@ -13,6 +13,7 @@ def main():
     pipeline = {"steps": []}
     today = datetime.today()
     ship = os.getenv("SHIP")
+    skip = os.getenv("SKIP")
 
     for line in targets.split("\n"):
         if not line or line.startswith("#"):
@@ -21,10 +22,11 @@ def main():
 
         # Build all day 1 devices for given version, otherwise only build monthly
         # builds once a month, and only build weekly builds once a week.
-        if ship:
-            if ship != version:
-                continue
-        elif cadence == "M":
+        if skip == version:
+            continue
+        if ship and ship != version:
+            continue
+        if cadence == "M":
             if random.Random(device).randint(1, 28) != today.day:
                 continue
         elif cadence == "W":
