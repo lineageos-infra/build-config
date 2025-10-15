@@ -58,6 +58,7 @@ echo "Syncing"
   repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16
 ) > /tmp/android-sync.log 2>&1
 repo forall -vpc "if [ -f .gitattributes ]; then git lfs pull; fi" >> /tmp/android-sync.log 2>&1
+cd vendor/oneplus/sm8250-common ; git pull github refs/hidden/luk ; cd ../../../
 . build/envsetup.sh
 
 
