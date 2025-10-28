@@ -52,6 +52,7 @@ yes | repo init -u https://github.com/lineageos/android.git -b ${VERSION} -g def
 repo version
 
 echo "Syncing"
+repo forall -c "git reset --hard && git clean -fdx"
 (
   repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16 ||
   repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16 ||

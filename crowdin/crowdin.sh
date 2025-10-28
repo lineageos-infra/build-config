@@ -34,6 +34,7 @@ repo sync lineage/crowdin
 cp lineage/crowdin/config/${BUILDKITE_BRANCH}_extra_packages.xml .repo/local_manifests
 
 echo "Syncing"
+repo forall -c "git reset --hard && git clean -fdx"
 (
   repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16 ||
   repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16 ||
