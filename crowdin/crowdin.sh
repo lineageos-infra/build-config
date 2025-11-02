@@ -15,6 +15,9 @@ if [ -z "$REPO_VERSION" ]; then
   export REPO_VERSION=v2.50.1
 fi
 
+export KERNEL_REPO_PROJECT_OBJECTS_DIR=/lineage/${BUILDKITE_BRANCH}/.repo/project-objects-kernel
+export KERNEL_REPO_PROJECTS_DIR=/lineage/${BUILDKITE_BRANCH}/.repo/projects-kernel
+
 cd $(dirname $0)
 SCRIPT_DIR=`pwd`
 

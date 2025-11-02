@@ -38,6 +38,9 @@ fi
 OFFSET="10000000"
 export BUILD_NUMBER=$(($OFFSET + $BUILDKITE_BUILD_NUMBER))
 
+export KERNEL_REPO_PROJECT_OBJECTS_DIR=/lineage/${VERSION}/.repo/project-objects-kernel
+export KERNEL_REPO_PROJECTS_DIR=/lineage/${VERSION}/.repo/projects-kernel
+
 echo "--- Syncing"
 
 mkdir -p /lineage/${VERSION}/.repo/local_manifests
