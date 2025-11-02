@@ -82,6 +82,9 @@ if [ "$RELEASE_TYPE" '==' "experimental" ]; then
     repopick ${EXP_PICK_CHANGES[@]}
   fi
 fi
+. build/envsetup.sh
+breakfast ${DEVICE} ${TYPE}
+
 echo "--- Building"
 mka otatools-package target-files-package dist | tee /tmp/android-build.log
 
