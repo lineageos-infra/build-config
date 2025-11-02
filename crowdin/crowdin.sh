@@ -45,7 +45,7 @@ repo forall -vpc "if [ -f .gitattributes ]; then git lfs pull; fi"
 
 
 echo "--- clobber"
-rm -rf out
+rm -rf out*
 
 # TODO(forkbomb): Modify the crowdin tool so we don't have to change this every time we change branch.
 export LINEAGE_CROWDIN_BASE_PATH_LINEAGE_17_1=/lineage/lineage-17.1
@@ -103,4 +103,4 @@ echo "--- Submitting translations"
 echo "Successful"
 
 echo "--- cleanup"
-rm -rf out
+rm -rf out*

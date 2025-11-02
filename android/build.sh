@@ -63,7 +63,7 @@ repo forall -vpc "if [ -f .gitattributes ]; then git lfs pull; fi" >> /tmp/andro
 
 
 echo "--- clobber"
-rm -rf out
+rm -rf out*
 
 echo "--- breakfast"
 breakfast ${DEVICE} ${TYPE}
@@ -91,4 +91,4 @@ scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/j
 # s3cmd --no-check-md5 put out/target/product/${DEVICE}/otatools.zip s3://lineageos-blob/${DEVICE}/${BUILD_UUID}/ || true
 
 echo "--- cleanup"
-rm -rf out
+rm -rf out*
