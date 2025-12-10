@@ -19,6 +19,7 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     lib32readline-dev \
     lib32z1-dev \
     libbz2-dev \
+    libgnutls28-dev \
     liblz4-tool \
     libncurses5 \
     libncurses5-dev \
