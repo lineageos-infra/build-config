@@ -83,15 +83,30 @@ if [ "$RELEASE_TYPE" '==' "experimental" ]; then
   fi
 fi
 echo "--- Building"
-mka otatools-package target-files-package dist | tee /tmp/android-build.log
+SDK_PHONE_REGEX='sdk_phone_(arm64|x86_64)'
+(
+    if [[ $DEVICE =~ $SDK_PHONE_REGEX ]]
+    then
+        mka emu_img_zip
+    else
+        mka otatools-package target-files-package dist
+    fi
+) | tee /tmp/android-build.log
 
 echo "--- Uploading"
 ssh jenkins@blob.lineageos.org rm -rf /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 ssh jenkins@blob.lineageos.org mkdir -p /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
-scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
-scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
-# s3cmd --no-check-md5 put out/dist/*target_files*.zip s3://lineageos-blob/${DEVICE}/${BUILD_UUID}/ || true
-# s3cmd --no-check-md5 put out/target/product/${DEVICE}/otatools.zip s3://lineageos-blob/${DEVICE}/${BUILD_UUID}/ || true
+if [[ $DEVICE =~ $SDK_PHONE_REGEX ]]
+then
+    # To support both `x86_64` and `arm64`.
+    architecture=${BASH_REMATCH[1]}
+    scp out/target/product/emu64${architecture::1}/sdk-repo-linux-system-images.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
+else
+    scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
+    scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
+    # s3cmd --no-check-md5 put out/dist/*target_files*.zip s3://lineageos-blob/${DEVICE}/${BUILD_UUID}/ || true
+    # s3cmd --no-check-md5 put out/target/product/${DEVICE}/otatools.zip s3://lineageos-blob/${DEVICE}/${BUILD_UUID}/ || true
+fi
 
 echo "--- cleanup"
 rm -rf out*
