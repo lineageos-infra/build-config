@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     bc \
@@ -11,17 +11,12 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     gcc-multilib \
     git \
     git-lfs \
-    gnupg \
     gperf \
     imagemagick \
-    libncurses5-dev \
-    lib32ncurses5-dev \
     lib32readline-dev \
-    lib32z1-dev \
     libbz2-dev \
     libgnutls28-dev \
     liblz4-tool \
-    libncurses5 \
     libncurses5-dev \
     libreadline-dev \
     libsdl1.2-dev \
@@ -38,24 +33,12 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     schedtool \
     squashfs-tools \
     wget \
-    zip \
-    zlib1g-dev \
-    python \
+    python3 \
     python3-pip \
-    libc6-dev-i386 \
-    x11proto-core-dev \
-    libx11-dev \
     gnupg \
-    flex \
-    bison \
-    build-essential \
     zip \
-    curl \
     zlib1g-dev \
-    gcc-multilib \
-    g++-multilib \
     libc6-dev-i386 \
-    lib32ncurses5-dev \
     x11proto-core-dev \
     libx11-dev \
     lib32z1-dev \
@@ -63,6 +46,10 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     xsltproc \
     unzip \
     fontconfig
+
+# https://github.com/LineageOS/lineage_wiki/blob/d16304060a46ff1c55847dfbc42e75015fd89412/_includes/templates/device_build_before_init.md?plain=1#L84-L89
+RUN wget https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2_amd64.deb && dpkg -i libtinfo5_6.3-2_amd64.deb && rm -f libtinfo5_6.3-2_amd64.deb
+RUN wget https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libncurses5_6.3-2_amd64.deb && dpkg -i libncurses5_6.3-2_amd64.deb && rm -f libncurses5_6.3-2_amd64.deb
 
 RUN curl -sLo /usr/local/bin/repo https://commondatastorage.googleapis.com/git-repo-downloads/repo && chmod +x /usr/local/bin/repo
 
