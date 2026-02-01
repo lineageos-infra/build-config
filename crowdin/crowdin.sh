@@ -103,7 +103,7 @@ if ! mka otatools-package target-files-package dist | tee /tmp/android-build.log
 fi
 
 echo "--- Submitting translations"
-./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -g submit -o c3po
+./lineage/crowdin/crowdin_sync.py --username c3po --branch $BUILDKITE_BRANCH -g submit -o c3po -U c3po
 echo "Successful"
 
 echo "--- cleanup"
