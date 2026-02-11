@@ -7,6 +7,7 @@ git clone https://github.com/torvalds/linux ${REPO} -b ${SRC_BRANCH}
 cd ${REPO}
 git remote add gerrit ssh://c3po@review.lineageos.org:29418/LineageOS/${REPO}
 for i in `seq 50000 -5000 0`; do
-    git push -o skip-validation gerrit ${SRC_BRANCH}^0~${i}:refs/heads/${DEST_BRANCH}
+    git push -o skip-validation gerrit ${SRC_BRANCH}^0~${i}:refs/heads/${DEST_BRANCH} ||
+        git push --no-thin -o skip-validation gerrit ${SRC_BRANCH}^0~${i}:refs/heads/${DEST_BRANCH}
     ssh -p 29418 c3po@review.lineageos.org replication start LineageOS/${REPO} --wait
 done
