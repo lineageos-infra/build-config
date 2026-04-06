@@ -57,9 +57,9 @@ repo version
 echo "Syncing"
 repo forall -c "git reset --hard && git clean -fdx" || true
 (
-  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16 ||
-  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16 ||
-  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j16
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j8 ||
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j8 ||
+  repo sync --detach --current-branch --no-tags --force-remove-dirty --force-sync -j8
 ) > /tmp/android-sync.log 2>&1
 repo forall -vpc "if [ -f .gitattributes ]; then git lfs pull; fi" >> /tmp/android-sync.log 2>&1
 . build/envsetup.sh
