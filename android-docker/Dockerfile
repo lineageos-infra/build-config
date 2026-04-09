@@ -61,6 +61,7 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     lib32z1-dev \
     libgl1-mesa-dev \
     xsltproc \
+    xxd \
     unzip \
     fontconfig
 
