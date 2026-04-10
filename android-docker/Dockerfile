@@ -1,6 +1,7 @@
-FROM ubuntu:20.04
+FROM debian:13
 
-RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
+# https://github.com/LineageOS/lineage_wiki/blob/b4d0279f1cac24b5adf2c8552dc141ded9045252/_includes/templates/device_build_before_init.md?plain=1#L70
+RUN DEBIAN_FRONTEND=noninteractive apt -U install -y \
     bc \
     bison \
     build-essential \
@@ -14,58 +15,38 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     gnupg \
     gperf \
     imagemagick \
-    libncurses5-dev \
-    lib32ncurses5-dev \
     lib32readline-dev \
     lib32z1-dev \
-    libbz2-dev \
+    libdw-dev \
+    libelf-dev \
     libgnutls28-dev \
-    liblz4-tool \
-    libncurses5 \
-    libncurses5-dev \
-    libreadline-dev \
     libsdl1.2-dev \
-    libsqlite3-dev \
     libssl-dev \
     libxml2 \
     libxml2-utils \
-    llvm \
+    lz4 \
     lzop \
-    openjdk-8-jdk \
     pngcrush \
+    protobuf-compiler \
+    python3-protobuf \
     rsync \
-    s3cmd \
     schedtool \
     squashfs-tools \
-    wget \
-    zip \
-    zlib1g-dev \
-    python \
-    python3-pip \
-    libc6-dev-i386 \
-    x11proto-core-dev \
-    libx11-dev \
-    gnupg \
-    flex \
-    bison \
-    build-essential \
-    zip \
-    curl \
-    zlib1g-dev \
-    gcc-multilib \
-    g++-multilib \
-    libc6-dev-i386 \
-    lib32ncurses5-dev \
-    x11proto-core-dev \
-    libx11-dev \
-    lib32z1-dev \
-    libgl1-mesa-dev \
     xsltproc \
     xxd \
-    unzip \
-    fontconfig
+    yasm \
+    zip \
+    zlib1g-dev
 
 RUN curl -sLo /usr/local/bin/repo https://commondatastorage.googleapis.com/git-repo-downloads/repo && chmod +x /usr/local/bin/repo
+
+RUN DEBIAN_FRONTEND=noninteractive apt install -y \
+    openjdk-25-jre \
+    python3-pip \
+    s3cmd \
+    wget
+
+RUN pip config set global.break-system-packages true
 
 RUN mkdir /lineage
 RUN mkdir /ccache
