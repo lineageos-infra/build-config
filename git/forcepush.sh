@@ -3,7 +3,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 mkdir -p ${REPO}
-git clone https://github.com/${REPO} ${REPO}
+git clone --reference=${HOME}/linux.git https://github.com/${REPO} ${REPO}
 cd ${REPO}
 git remote add gerrit ssh://c3po@review.lineageos.org:29418/${REPO}
 if git checkout ${DEST_BRANCH}; then
