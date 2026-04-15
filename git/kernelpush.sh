@@ -3,7 +3,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 mkdir -p ${REPO}
-git clone --reference=${HOME}/linux.git https://github.com/torvalds/linux ${REPO}
+git clone --bare --reference=${HOME}/linux.git https://github.com/torvalds/linux ${REPO}
 cd ${REPO}
 git remote add gerrit ssh://c3po@review.lineageos.org:29418/LineageOS/${REPO}
 for i in `seq 50000 -5000 0`; do
