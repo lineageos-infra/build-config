@@ -83,7 +83,7 @@ if [ "$RELEASE_TYPE" '==' "experimental" ]; then
   fi
 fi
 echo "--- Building"
-mka otatools-package target-files-package dist check-vintf-all | tee /tmp/android-build.log
+m otatools-package target-files-package dist check-vintf-all | tee /tmp/android-build.log
 
 echo "--- Uploading"
 ssh jenkins@blob.lineageos.org rm -rf /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
