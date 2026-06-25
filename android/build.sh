@@ -8,8 +8,6 @@ export BUILD_ENFORCE_SELINUX=1
 export BUILD_NO=
 unset BUILD_NUMBER
 
-#TODO(zif): convert this to a runtime check, grep "sse4_2.*popcnt" /proc/cpuinfo
-export CPU_SSE42=false
 # Following env is set from build
 # VERSION
 # DEVICE
