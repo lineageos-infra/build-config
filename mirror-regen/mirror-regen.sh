@@ -31,7 +31,7 @@ update_thingy() {
 
     if [ -n "$REVIEWMSG" ]; then
         git push ssh://c3po@review.lineageos.org:29418/LineageOS/mirror HEAD:refs/for/main
-        ssh review.lineageos.org "gerrit review -m '$REVIEWMSG' '$(git rev-parse HEAD)'"
+        ssh -p 29418 c3po@review.lineageos.org "gerrit review -m '$REVIEWMSG' '$(git rev-parse HEAD)'"
     else
         git push ssh://c3po@review.lineageos.org:29418/LineageOS/mirror HEAD:refs/heads/main
     fi
