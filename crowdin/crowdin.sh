@@ -9,7 +9,7 @@ export BUILD_NO=
 unset BUILD_NUMBER
 
 if [ -z "$REPO_VERSION" ]; then
-  export REPO_VERSION=v2.50.1
+  export REPO_VERSION=v2.65
 fi
 
 export KERNEL_REPO_PROJECT_OBJECTS_DIR=/lineage/${BUILDKITE_BRANCH}/.repo/project-objects-kernel
