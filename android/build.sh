@@ -84,23 +84,18 @@ echo "--- Building"
 m otatools-package target-files-package dist check-vintf-all | tee /tmp/android-build.log
 
 echo "--- Uploading"
-ssh jenkins@blob.lineageos.org rm -rf /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
-ssh jenkins@blob.lineageos.org mkdir -p /home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
-scp out/dist/*target_files*.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
 s3cmd --no-check-md5 put out/dist/*target_files*.zip s3://lineageos-temp/${DEVICE}/${BUILD_UUID}/ || true
 if [ -f out/soong/.intermediates/build/make/tools/otatools_package/otatools-package/linux_glibc_x86_64/gen/otatools.zip ]; then
   zip -d out/soong/.intermediates/build/make/tools/otatools_package/otatools-package/linux_glibc_x86_64/gen/otatools.zip \
     \*.avbpubkey \*.pem \*.pk8 \
     -x external/avb/test/data/testkey_\*.pem \
     -x vendor/lineage/build/target/product/security/lineage.x509.pem
-  scp out/soong/.intermediates/build/make/tools/otatools_package/otatools-package/linux_glibc_x86_64/gen/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
   s3cmd --no-check-md5 put out/soong/.intermediates/build/make/tools/otatools_package/otatools-package/linux_glibc_x86_64/gen/otatools.zip s3://lineageos-temp/${DEVICE}/${BUILD_UUID}/ || true
 else
   zip -d out/target/product/${DEVICE}/otatools.zip \
     \*.avbpubkey \*.pem \*.pk8 \
     -x external/avb/test/data/testkey_\*.pem \
     -x vendor/lineage/build/target/product/security/lineage.x509.pem
-  scp out/target/product/${DEVICE}/otatools.zip jenkins@blob.lineageos.org:/home/jenkins/incoming/${DEVICE}/${BUILD_UUID}/
   s3cmd --no-check-md5 put out/target/product/${DEVICE}/otatools.zip s3://lineageos-temp/${DEVICE}/${BUILD_UUID}/ || true
 fi
 
