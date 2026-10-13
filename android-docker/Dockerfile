@@ -1,6 +1,6 @@
 FROM debian:13
 
-# https://github.com/LineageOS/lineage_wiki/blob/a386e6adbcafb2cc7c6ce7ffd119413508a4ce34/_includes/templates/device_build_before_init.md?plain=1#L70
+# https://github.com/LineageOS/lineage_wiki/blob/a386e6adbcafb2cc7c6ce7ffd119413508a4ce34/_includes/templates/device_build_before_init.md?plain=1#L71
 RUN DEBIAN_FRONTEND=noninteractive apt -U install -y \
     bc \
     bison \
